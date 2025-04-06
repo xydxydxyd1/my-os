@@ -119,3 +119,11 @@ it for 30 minutes. It is 6 pm right now.
 Ok I just don'ot realy wanna do that. I feels like copping out.
 
 It seems like xpm is what I've been doing manually (the utils folder but better)
+
+After literally hours of pain, I finally found an example project that actually
+works, much to my joy.
+
+https://balau82.wordpress.com/2010/02/28/hello-world-for-bare-metal-arm-using-qemu/
+
+This journey is not fruitless however, since I did also learn about xpm, which
+made my life a lot easier

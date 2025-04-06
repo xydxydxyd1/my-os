@@ -30,11 +30,6 @@
     "minimumXpmRequired": "0.20.8",
     "dependencies": {},
     "devDependencies": {
-      "@xpack-dev-tools/arm-none-eabi-gcc": {
-        "specifier": "14.2.1-1.1.1",
-        "local": "link",
-        "platforms": "all"
-      },
       "@xpack-dev-tools/qemu-arm": {
         "specifier": "7.0.0-1.1",
         "local": "link",
@@ -47,6 +42,11 @@
       },
       "@xpack-dev-tools/ninja-build": {
         "specifier": "1.11.0-1.1",
+        "local": "link",
+        "platforms": "all"
+      },
+      "@xpack-dev-tools/arm-none-eabi-gcc": {
+        "specifier": "14.2.1-1.1.1",
         "local": "link",
         "platforms": "all"
       }
