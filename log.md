@@ -1,36 +1,3 @@
-### 2025-04-03
-
-Now, let's first bootstrap. I have a **Raspberry Pi 4 Model B**. This RPI
-includes a **ARM Cortex-A72** CPU, which implements the **ARMv8-A**
-architecture. In this architecture, one of the more predominant instruction set
-is **A64**, which I presume to be important. The **Programmer's Guide** for this
-architecture can be found in `./references/cortex_a-programming.pdf`.
-
-Section 13 discusses boot code. But before that, it is wise to run any AArch64
-code at all. This requires knowledge from Appendix B.3.
-
-The problem is that I can't ease into it or debug it. Bootloader either works or
-doesn't work. I have no way of seeing what is happening. I need to first get
-qemu working to run raspbian.
-
-After a brief look, I don't think it is worth it to pursue this. My alternative
-is to use JTAG to inspect the physical device' operation.
-
-I am faced with a conundrum.
-
-The bootloader is giving me a huge amount of trouble. This is stopping all of my
-progress and I am like a headless chicken. I need knowledge in all of the
-following nontrivial things:
-* A64 assembly
-* Cortex-A72 booting
-* Compilation and linking
-    + linker script
-
-I've decided to ignore these topics for now and copy code from
-[](https://www.rpi4os.com/part1-bootstrapping/). I should clearly mention it.
-
-Ok wait, my dad just said you should learn it so I guess I am learning it.
-
 ### 2025-04-02
 
 I want to flash a program onto the board without using the provided IDE to learn
@@ -63,3 +30,90 @@ eabi for now (moving to elf should always be possible later).
 
 To make development easier, I will also look into QEMU for emulating the RPI.
 
+### 2025-04-03
+
+Now, let's first bootstrap. I have a **Raspberry Pi 4 Model B**. This RPI
+includes a **ARM Cortex-A72** CPU, which implements the **ARMv8-A**
+architecture. In this architecture, one of the more predominant instruction set
+is **A64**, which I presume to be important. The **Programmer's Guide** for this
+architecture can be found in `./references/cortex_a-programming.pdf`.
+
+Section 13 discusses boot code. But before that, it is wise to run any AArch64
+code at all. This requires knowledge from Appendix B.3.
+
+The problem is that I can't ease into it or debug it. Bootloader either works or
+doesn't work. I have no way of seeing what is happening. I need to first get
+qemu working to run raspbian.
+
+After a brief look, I don't think it is worth it to pursue this. My alternative
+is to use JTAG to inspect the physical device' operation.
+
+I am faced with a conundrum.
+
+The bootloader is giving me a huge amount of trouble. This is stopping all of my
+progress and I am like a headless chicken. I need knowledge in all of the
+following nontrivial things:
+* A64 assembly
+* Cortex-A72 booting
+* Compilation and linking
+    + linker script
+
+I've decided to ignore these topics for now and copy code from
+[](https://www.rpi4os.com/part1-bootstrapping/). I should clearly mention it.
+
+## Learn Assembly
+
+Well actually, my dad told me to look into them so I will. I will start with a
+Hello world C program running on QEMU: success!
+
+Next, write ARM assembly code. According to [stack
+overflow](https://stackoverflow.com/questions/12946958/what-is-the-interface-for-arm-system-calls-and-where-is-it-defined-in-the-linux)
+I should consult to manpages. There are different architectures that might
+apply, but I will assume Arm64 instead of EABI since I thought that was
+embedded. We use `SVC`, which is inline with the programmer guide for the
+architecture. Parameters are passed in registers.
+
+My attempt failed, so I copied some random guy off the internet and succeeded.
+Now I am looking into why: short answer is that I suck at Assembly. There are
+some basic knowledge that I do not have.
+
+### 2025-04-04
+
+Where can I find the standard for the assembly language? The assembler
+definitely knows so I'll look there first.
+
+On the journey I found
+[this](https://cpen432.github.io/resources/gnu_arm_ref.pdf) very helpful
+reference. However, I am still curious who defines the standard.
+
+According to GPT, while the instruction set is defined by ARM, the syntax for
+the assembly language is defined by GNU. The specification can be found on
+gnu.org at binutils ([](https://sourceware.org/binutils/docs/as/))
+
+I have successfully printed a number! Now I need to learn how to link back to C.
+
+I have run into a problem: the library functions are not being linked.
+
+My guess is that linux/libc/lib contians the dynamic library, but I need to link
+it to the static library. But if that is the case, how did I originally compile
+it?
+
+### 2025-04-05
+
+Today's goal is to run some bootloader code with gdb. My two choices are
+* CLI
+* IDE
+
+I think an IDE will have one major advantage over CLI:
+> Easy to run (one button over several commands which at best can be made into a
+  script)
+
+And I want to use CLI because it generally allows me to be more in touch with
+the technology I am using.
+
+But in this case, the technology in question is the GDB debugger, and honestly I
+don't really care about it. It can be a completely separate thing if I want to
+study it. I am working under the assumption that IDE is easy to setup. Let's try
+it for 30 minutes. It is 6 pm right now.
+
+Ok I just don'ot realy wanna do that. I feels like copping out.
