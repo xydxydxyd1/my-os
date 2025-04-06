@@ -34,6 +34,21 @@
         "specifier": "14.2.1-1.1.1",
         "local": "link",
         "platforms": "all"
+      },
+      "@xpack-dev-tools/qemu-arm": {
+        "specifier": "7.0.0-1.1",
+        "local": "link",
+        "platforms": "all"
+      },
+      "@xpack-dev-tools/cmake": {
+        "specifier": "3.21.6-1.1",
+        "local": "link",
+        "platforms": "all"
+      },
+      "@xpack-dev-tools/ninja-build": {
+        "specifier": "1.11.0-1.1",
+        "local": "link",
+        "platforms": "all"
       }
     },
     "properties": {},
