@@ -1,6 +1,7 @@
 *.img
 
 utils/
+xpacks/
 # Prerequisites
 *.d
 

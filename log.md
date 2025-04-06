@@ -117,3 +117,5 @@ study it. I am working under the assumption that IDE is easy to setup. Let's try
 it for 30 minutes. It is 6 pm right now.
 
 Ok I just don'ot realy wanna do that. I feels like copping out.
+
+It seems like xpm is what I've been doing manually (the utils folder but better)
