@@ -13,4 +13,4 @@ if [[ "$#" -ne 0 ]]; then
     exit 1
 fi
 
-qemu-system-aarch64 -s -S -M raspi4b -nographic -kernel test.bin
+qemu-system-aarch64 -nographic -s -S -M raspi4b -kernel test.bin
