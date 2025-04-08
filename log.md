@@ -127,3 +127,58 @@ https://balau82.wordpress.com/2010/02/28/hello-world-for-bare-metal-arm-using-qe
 
 This journey is not fruitless however, since I did also learn about xpm, which
 made my life a lot easier
+
+### 2025-04-06
+
+Following yesterday's work, I have successfully ran hello world on an ARM QEMU
+machine. Now, I am attempting to transfer this program to raspberry pi.
+
+The primary hurdle is the architecture: rpi4b uses AArch64, not Arm. I changed
+the `-mcpu` flag and the toolchain. Additionally, I installed the newest version
+of QEMU outside of XPM. This resulted in a program that doesn't output anything,
+but can be linked to GDB. Additionally, I can set breakpoints in GDB but they
+don't do anything.
+
+My next step is to attempt to break at a line in GDB. This can be done for the
+ARM version but can't for the new AArch64. I suspect it is because of a
+different bootstrapping system.
+
+To test this theory, I can try the old program on a different ARM machine first?
+
+I copied `guide2` to `src`, keeping everything except the architecture the same.
+* Registers turn from `r0` to `x0`
+* Toolchain changed from `arm-none-eabi` to `aarch64-none-elf`
+* QEMU uses different CPU
+* (TODO) Different bootloading
+
+### 2025-04-08
+
+I am still slightly confused by the terminologies I see.
+* Cortex-whatever is the CPU
+    + Are peripherals like UART inside the CPU?
+* Armv7-whatever is the instruction set
+* AArch64 and ARM is the architecture, 64 bit and 32 bit
+
+What is the relationship between the architecture, the core, and the instruction
+set?
+
+According to ChatGPT, the relationship goes as follows:
+1. Given a CPU such as Cortex-A72
+2. This CPU implements a particular instruction set architecture (ISA) such as
+   Armv7
+    a. Newer versions of the same architecture is backwards-compatible.
+    b. An ISA may have different *profiles* (such as ARMv7-A) which targets
+       different use cases
+    c. The ISA defines the set of instructions available to the CPU.
+
+Inside the book, they said that architectures are backwards compatible. If that
+is the case, what is the difference between `qemu-system-arm` and
+`qemu-system-aarch64`?
+
+I found my big mistake: Cortex-A72 is **very different** from Cortex-A7. The
+latter is what I have been assuming so far and reading documentation for. The
+former implements ARMv8, which notably includes a 64-bit state using AArch64! I
+will need to update my programmer's guide.
+
+The booting guide says that reset vector is implementation defined. I can't find
+it so I'm gonna say it is 0000.
