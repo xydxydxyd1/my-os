@@ -13,4 +13,4 @@ if [[ "$#" -ne 0 ]]; then
     exit 1
 fi
 
-qemu-system-arm -M versatilepb -m 128M -nographic -kernel test.bin
+qemu-system-arm -nographic -M versatilepb -m 128M -kernel test.bin
