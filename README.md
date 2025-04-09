@@ -1,6 +1,6 @@
 ## Todo
 
-* Flash program
+* Flash to physical RPI and echo UART
 
 ## RPIOS
 
@@ -9,17 +9,20 @@ programming.
 
 The project will have three folders:
 * `./src/` contains the source code for the project
-* `./references/` contains the documentations frequently used.
+* `./references/` (Not pushed) contains the documentations frequently used.
 * `./guide<id>` contains the code sampled from a particular guide. See [guides
 used](#guides-used)
-* `./utils/` (LEGACY) contains miscellaneous tools such as the cross compilation
-gcc used. It will not be pushed
 
 ## Guides used
 
+Guides are walkthroughs of solution of a particular problem. I try not to use
+them because I learn the most by struggling through a problem myself. I use them
+if I have been stuck on a problem for a significant amount of time without
+making progress.
+
 The numbering of the list indicates the ID of the guide in this repository, used
-to find the path (`./guide<id>`).
-1. [RPI4 OS](https://www.rpi4os.com/part2-building/) from [babbleberry](https://github.com/babbleberry)
+to find the path (`./guide<id>`). The ID may not be continuous since I didn't
+find all guides to be suitable for me.
 2. [Baremetal
    qemu](https://balau82.wordpress.com/2010/02/28/hello-world-for-bare-metal-arm-using-qemu/)
    from [balau](https://balau82.wordpress.com/)
