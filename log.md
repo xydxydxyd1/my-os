@@ -207,3 +207,8 @@ this offset is quite literally useless.
 
 I just successfully loaded a register with some value. This confirms that the
 thing starts executing at address 0x0.
+
+Now, I can backtrack to the `-kernel` option. This means that QEMU does some
+additional setup before loading my kernel, including tasks needed to make the
+kernel GDB compatible. Since I don't wanna spend too much time looking at GDB, I
+am going to ignore the intricate details of this area.
