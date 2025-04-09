@@ -182,3 +182,21 @@ will need to update my programmer's guide.
 
 The booting guide says that reset vector is implementation defined. I can't find
 it so I'm gonna say it is 0000.
+
+After learning some ways to examine the machine state on QEMU, I realized that
+when I run `qemu-system-arm -M raspi`, the flashed program is not present at the
+right address. I want to know why. However, it is to note that the program seems
+to run fine?
+
+I found the program at 0x80000. This is not what I expected. It is related to
+how QEMU load programs. The `-kernel` option is related to this. This behavior
+is documented
+[here](https://www.qemu.org/docs/master/system/invocation.html#hxtool-8).
+
+The natural next step is to get Hello World working without the handholding of
+`kernel`.
+
+I have successfully loaded something into a memory location that I expect given
+a particular binary file. However, the layout of the binary file is not what I
+expected. The linker file `test.ld` indicates that the first memory location
+should be at 0x10000, but the binary clearly shows that there is no such offset.
