@@ -200,3 +200,10 @@ I have successfully loaded something into a memory location that I expect given
 a particular binary file. However, the layout of the binary file is not what I
 expected. The linker file `test.ld` indicates that the first memory location
 should be at 0x10000, but the binary clearly shows that there is no such offset.
+
+Evidently, this is because ELF uses virtual addresses. As a result, the offset
+of the first section is ignored by objcopy. This means that for my use case,
+this offset is quite literally useless.
+
+I just successfully loaded a register with some value. This confirms that the
+thing starts executing at address 0x0.

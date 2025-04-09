@@ -1,4 +1,4 @@
-ENTRY(_reset)
+ENTRY(_Reset)
 SECTIONS
 {
  .startup . : { startup.o(.text) }
