@@ -23,6 +23,9 @@ making progress.
 The numbering of the list indicates the ID of the guide in this repository, used
 to find the path (`./guide<id>`). The ID may not be continuous since I didn't
 find all guides to be suitable for me.
-2. [Baremetal
+1. [Baremetal
    qemu](https://balau82.wordpress.com/2010/02/28/hello-world-for-bare-metal-arm-using-qemu/)
    from [balau](https://balau82.wordpress.com/)
+
+Next, I want to load into main. This should just be branching to main, I think.
+And I was right!

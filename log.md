@@ -212,3 +212,10 @@ Now, I can backtrack to the `-kernel` option. This means that QEMU does some
 additional setup before loading my kernel, including tasks needed to make the
 kernel GDB compatible. Since I don't wanna spend too much time looking at GDB, I
 am going to ignore the intricate details of this area.
+
+### 2025-04-09
+
+Since this is a nice stopping point, I took some moment to clean up the dev
+environment.
+* Load environment variables thorough tmux
+* Run script for source that starts debugging mode
