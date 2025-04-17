@@ -4,9 +4,11 @@ _Reset:
     mrs     x0, mpidr_el1
     and     x0, x0, #0xff   // aff0 indicates core ID
     cbz     x0, _init
+_secondaries:
     wfi
-    // Initialize the register bank
+    b       _secondaries    // halt secondary cores
 _init:
+    // Initialize the register bank
     mov     x0, xzr
     mov     x1, xzr
     mov     x2, xzr

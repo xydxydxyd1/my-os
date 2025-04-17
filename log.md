@@ -280,3 +280,6 @@ character! Now, I am wondering why WFE didn't work when WFI and B . worked.
 
 My first suspicion is that I didn't clear the event register, so I will look
 into that first.
+
+The ARMv8 ISA states that WFE must account for spurious wakeups. I assume this
+is done by looping and checking for wake conditions.
