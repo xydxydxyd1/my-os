@@ -219,3 +219,64 @@ Since this is a nice stopping point, I took some moment to clean up the dev
 environment.
 * Load environment variables thorough tmux
 * Run script for source that starts debugging mode
+
+Next, I want to load into main. This should just be branching to main, I think.
+And I was right!
+
+With C Entry solved, I need to make sure startup works for RPI. The primary
+difference is that RPI has 4 cores? Well, Cortex-A72 is quad core so how is my
+stuff executing properly right now?
+
+### 2025-04-10
+
+Since 4 cores hasn't been a problem so far I am going to comfortably ignore it
+and focus on more important things.
+
+I want a print message interface. This involves including the standard library
+and printing to UART. I'll do the second one first.
+
+### 2025-04-13
+
+I need to first ensure that I can control the UART presented by the QEMU
+console.
+
+I am also confused by the following terminology
+* Pin: Does it refer to a physical break out pin or an internal one?
+* GPIO: Same question above.
+
+There is little documentation on what the QEMU->view->serial0 actually is, so I
+will assume that it is the implemented UART device. Under this assumption, I
+just need to setup the UART interface.
+
+There are different UART devices that might apply. BCM2835 FB? What is that?
+
+Why is it that info mtree show the wrong memory map? Perhaps it is for an
+earlier version of the raspberry boards? I can verify this by checking the TRM.
+
+### 2025-04-14
+
+BCM2835 is not the SoC that Rpi4b uses. Why? This might be fine for running
+raspbian? Can I simply use the rpi4b address map?
+
+Let's try the rpi4b map first. If it works it works, if it doesn't we'll think
+about it from there.
+
+To understand UART, I need to understand MMIO. To understand MMIO, I need to
+understand memory load and store.
+
+### 2025-04-15
+
+I read quite a bit on memory architecture and now understands (at a very surface
+and high level) how it works. I feel more confident tackling the UART problem
+now.
+
+Since I never enabled or configured the MMU and is operating at EL3, I will
+assume that my virtual address is identical to my physical address.
+
+### 2025-04-16
+
+I was right. By disabling secondary cores, I successfully only printed one
+character! Now, I am wondering why WFE didn't work when WFI and B . worked.
+
+My first suspicion is that I didn't clear the event register, so I will look
+into that first.

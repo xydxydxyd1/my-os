@@ -1,6 +1,12 @@
 .global _Reset
 _Reset:
+    // Disable non-primary cores
+    mrs     x0, mpidr_el1
+    and     x0, x0, #0xff   // aff0 indicates core ID
+    cbz     x0, _init
+    wfi
     // Initialize the register bank
+_init:
     mov     x0, xzr
     mov     x1, xzr
     mov     x2, xzr

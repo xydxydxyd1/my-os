@@ -1,6 +1,7 @@
 ## Todo
 
 * Flash to physical RPI and echo UART
+* Interface for printing debug messages
 
 ## RPIOS
 
@@ -26,6 +27,3 @@ find all guides to be suitable for me.
 1. [Baremetal
    qemu](https://balau82.wordpress.com/2010/02/28/hello-world-for-bare-metal-arm-using-qemu/)
    from [balau](https://balau82.wordpress.com/)
-
-Next, I want to load into main. This should just be branching to main, I think.
-And I was right!
