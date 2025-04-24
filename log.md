@@ -334,4 +334,16 @@ have an inode region and a data region. Each file is represented by one inode,
 and the inode specifies the data region among other metadata.
 
 Since I am now working closely with hardware memory locations, QEMU's
-sometimes-incorrect system no longer works. I'll work on flashing via PXE.
+sometimes-incorrect system no longer works. I'll work on flashing via USB first.
+If that doesn't work, I'll try PXE and other stuff. To do this, I need cables
+
+### 2025-04-23
+
+The goal for today is to flash anything on the RPI.
+
+I will not look into USB boot for the following reasons:
+* There is not a lot of support
+* It is dangerous territory (EEPROM) and I need my Pi for other projects
+
+What if I try to execute my code on the RPI with Raspbian first to ensure that
+it works? That sounds like a good idea.
