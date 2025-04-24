@@ -283,3 +283,55 @@ into that first.
 
 The ARMv8 ISA states that WFE must account for spurious wakeups. I assume this
 is done by looping and checking for wake conditions.
+
+### 2025-04-17
+
+Now I need to think about system design. I want to modularize MyOS in a way that
+make it as device-agnostic as possible: This means that hopefully, my operating
+system will also be able to run on X64 with limited changes.
+
+I will leave the actual configuration to the future. For now, I simply design
+architectural ideas.
+
+Each processor architecture has many different aspects, but they all have very
+similar functionality (such as serial communication). I will build a standard
+library of these standard functionalities and build my operating system on top
+of it.
+
+Starting with a serial shell. The system-level abstraction provided would be
+serial communication. The user-level application will then use the communication
+system to send messages to console back and forth. Can I break it down further?
+Serial communication is often implementedd via protocols such as UART, which
+specifies ports such as DR, correct?
+
+## What the OS need
+
+In the end, I want a operating system that can execute no-std binaries. I don't
+really want to implement a full library for a language, so running any kind of
+on-the-market user-space programs would be very difficult.
+
+I need I/O. That can be UART serial, external display, mouse and keyboard
+input, etc.
+
+I need file system.
+
+I need process management.
+
+Let's start with I/O. How do programs usually receive I/O? C has the STDIN file
+descriptor. Everything is a file, ig. Somehow it comes back to the file system.
+
+A file system has the following interface:
+* open(path) -> file
+* write(file, bytes)
+* read(file) -> bytes
+* remove(path)
+
+I need some kind of data structure to keep track of this. I'll use my 150
+knowledge.
+
+First, I need to allocate a general area for the file system. Then, I need to
+have an inode region and a data region. Each file is represented by one inode,
+and the inode specifies the data region among other metadata.
+
+Since I am now working closely with hardware memory locations, QEMU's
+sometimes-incorrect system no longer works. I'll work on flashing via PXE.

@@ -1,7 +1,7 @@
 ## Todo
 
-* Flash to physical RPI and echo UART
-* Interface for printing debug messages
+* Write something to permanent storage, anything
+* PXE booting
 
 ## RPIOS
 
