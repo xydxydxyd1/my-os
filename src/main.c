@@ -5,13 +5,12 @@ volatile unsigned int * const UART0DR = (unsigned int *)0xfe201000;
  
 void print_uart0(const char *s) {
     int i;
-    for (i = s[0]; s[i] != '\0'; i++) {
+    for (i = 0; s[i] != '\0'; i++) {
         *UART0DR = s[i];
     }
 }
  
 void c_entry() {
-    *UART0DR = 'a';
     print_uart0("Hello world!\n");
     while (1);
 }
