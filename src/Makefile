@@ -1,7 +1,7 @@
 PREFIX = aarch64-none-elf
 CC = $(PREFIX)-gcc $(INCLUDES)
 
-SRCS = $(wildcard *.c) $(wildcard peripherals/*.c)
+SRCS = $(wildcard *.c) $(wildcard peripherals/*.c) $(wildcard hardware/*.c)
 OBJS = startup.o $(SRCS:.c=.o)
 
 FLAGS = -mcpu=cortex-a72 -g
