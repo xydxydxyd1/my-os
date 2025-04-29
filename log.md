@@ -347,3 +347,30 @@ I will not look into USB boot for the following reasons:
 
 What if I try to execute my code on the RPI with Raspbian first to ensure that
 it works? That sounds like a good idea.
+
+### 2025-04-24
+
+Ethernet connection worked with RPI, which would allow me to set up my RPI
+anywhere as long as I have my laptop. I will now clean up the network interfaces
+and set up SSH easier, along with verify that it actually works.
+
+Now that that is done, I need to write a sample program for RPI to test
+flashing with. I will use UART since it satisfies the following criteria.
+* Can be monitored from the outside.
+* Relatively simple.
+
+To be more specific, I will write a program that continuously prints Hello
+world.
+
+The first thing I need to figure out is the memory situation. It turns out that
+there are different addressing modes in RPI. The documentation uses "Legacy
+master", which is different than physical. `info mtree` seems to match the
+description of the ARM "Low peripheral" mode physical addresses, so I need to
+understand what low peripheral mode (and VPU's) are.
+
+Now that I have a working hello world, the next step is to run it on RPI.
+
+### 2025-04-29
+
+In the meantime, I want to start actually coding the operating system. I say
+let's start with a full UART system for simple print-statement debugging.

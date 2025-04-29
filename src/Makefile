@@ -1,13 +1,16 @@
 PREFIX = aarch64-none-elf
-CC = $(PREFIX)-gcc
+CC = $(PREFIX)-gcc $(INCLUDES)
+
+SRCS = $(wildcard *.c) $(wildcard peripherals/*.c)
+OBJS = startup.o $(SRCS:.c=.o)
 
 CCFLAGS = -mcpu=cortex-a72 -g
 
 main.bin: main.elf
 	$(PREFIX)-objcopy -O binary $^ $@
 
-main.elf: link.ld main.o startup.o
-	$(PREFIX)-ld -T link.ld main.o startup.o -o $@
+main.elf: link.ld $(OBJS)
+	$(PREFIX)-ld -T link.ld $(OBJS) -o $@
 
 %.o: %.S
 	$(PREFIX)-as $(CCFLAGS) $^ -o $@
@@ -16,4 +19,6 @@ main.elf: link.ld main.o startup.o
 	$(CC) -c $(CCFLAGS) $^ -o $@
 
 clean:
-	rm -rf *.o *.elf *.bin
+	find . -name "*.o" -type f -delete
+	find . -name "*.elf" -type f -delete
+	find . -name "*.bin" -type f -delete
