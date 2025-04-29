@@ -1,3 +1,5 @@
+.clangd
+
 references/
 *.img
 *.bin
@@ -7,6 +9,7 @@ xpacks/
 # Prerequisites
 *.d
 
+# Eclipse stuff
 .metadata
 bin/
 tmp/
