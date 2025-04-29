@@ -6,4 +6,12 @@
 * Description:      Peripheral addresses source file
 *****************************************************************************/
 
-volatile unsigned int * const MM_UART0_DR = (unsigned int *)0xfe201000;
+
+// UART
+
+volatile unsigned int * const MM_UART0_BASE = (unsigned int *)0xfe201000;
+volatile unsigned int * const MM_UART2_BASE = (unsigned int *)0xfe201400;
+volatile unsigned int * const MM_UART3_BASE = (unsigned int *)0xfe201600;
+volatile unsigned int * const MM_UART4_BASE = (unsigned int *)0xfe201800;
+volatile unsigned int * const MM_UART5_BASE = (unsigned int *)0xfe201a00;
+int MM_UART_DR = 0x00;

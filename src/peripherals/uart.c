@@ -13,6 +13,6 @@
 void print_uart0(const char *s) {
     int i;
     for (i = 0; s[i] != '\0'; i++) {
-        *MM_UART0_DR = s[i];
+        *(MM_UART0_BASE + MM_UART_DR) = s[i];
     }
 }
