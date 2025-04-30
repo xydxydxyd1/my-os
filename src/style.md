@@ -4,9 +4,14 @@
 ## Naming
 
 Due to lack of namespaces in C, all identifiers are prepended with a unique
-two-letter code representing the source/header file they belong to. Other than
-that, use snake_case for function and variable names, ALL_CAPS for constants,
-PascalCase for types and structs.
+code representing the source/header file they belong to. Other than that, use
+snake_case for function and variable names, ALL_CAPS for constants, PascalCase
+for types and structs.
+
+An exception to the prefix rule is the utils; the goal of utils is to make the
+program more writable so long prefixes defeats the point. Additionally, due to
+their ubiquitousness, I believe it is safe to assume that utils declarations
+would not be repeated.
 
 
 ## Spacing

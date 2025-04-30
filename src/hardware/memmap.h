@@ -11,18 +11,20 @@
 #define MEMMAP_H
 
 
+#include <stdint.h>
+
+
 // UART
 
-extern volatile unsigned int * const MM_UART0_BASE;
-extern volatile unsigned int * const MM_UART2_BASE;
-extern volatile unsigned int * const MM_UART3_BASE;
-extern volatile unsigned int * const MM_UART4_BASE;
-extern volatile unsigned int * const MM_UART5_BASE;
+typedef struct {
+    uint32_t DR;
+} MM_UART;
 
-
-// UART Offsets
-
-extern int MM_UART_DR;  // Data register
+extern volatile MM_UART * const MM_UART0;
+extern volatile MM_UART * const MM_UART2;
+extern volatile MM_UART * const MM_UART3;
+extern volatile MM_UART * const MM_UART4;
+extern volatile MM_UART * const MM_UART5;
 
 
 #endif /* ifndef MEMMAP_H */

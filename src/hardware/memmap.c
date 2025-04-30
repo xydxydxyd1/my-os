@@ -7,11 +7,13 @@
 *****************************************************************************/
 
 
+#include "memmap.h"
+
+
 // UART
 
-volatile unsigned int * const MM_UART0_BASE = (unsigned int *)0xfe201000;
-volatile unsigned int * const MM_UART2_BASE = (unsigned int *)0xfe201400;
-volatile unsigned int * const MM_UART3_BASE = (unsigned int *)0xfe201600;
-volatile unsigned int * const MM_UART4_BASE = (unsigned int *)0xfe201800;
-volatile unsigned int * const MM_UART5_BASE = (unsigned int *)0xfe201a00;
-int MM_UART_DR = 0x00;
+volatile MM_UART * const MM_UART0 = (MM_UART *)0xfe201000;
+volatile MM_UART * const MM_UART2 = (MM_UART *)0xfe201400;
+volatile MM_UART * const MM_UART3 = (MM_UART *)0xfe201600;
+volatile MM_UART * const MM_UART4 = (MM_UART *)0xfe201800;
+volatile MM_UART * const MM_UART5 = (MM_UART *)0xfe201a00;

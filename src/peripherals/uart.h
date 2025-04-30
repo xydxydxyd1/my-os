@@ -10,7 +10,10 @@
 #define UART_H
 
 
-void print_uart0(const char *s);
+#include <stdint.h>
+
+
+void print_uart0(const uint8_t *s);
 
 
 #endif /* ifndef UART_H */
