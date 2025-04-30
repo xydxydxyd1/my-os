@@ -374,3 +374,58 @@ Now that I have a working hello world, the next step is to run it on RPI.
 
 In the meantime, I want to start actually coding the operating system. I say
 let's start with a full UART system for simple print-statement debugging.
+
+I am thinking about layers of abstraction. Currently I have 2 interfaces for
+UART: one provides the memory location, registers, etc. (at memmap). The second
+uses these MMIO to implement things like print.
+
+I just realized that the printing logic doesn't even have to be coupled to UART.
+I think a better way to do this is to have a console with the ability to write
+one byte, and then print at a high level? This actually sounds kind of like
+inheritance. For such a thing, I essentially need a function for printing a
+byte stream.
+
+Anyways, let's work on the low level stuff first. Should I consolidate UART and
+memmap? The usefulness of memmap is determined by how likely it is that I can
+change only memmap and be left with a working implementation.
+
+Firstly, not all computers use MMIO (although most of them do). This is not
+really a big problem, since I can view the default MMIO of ARM as an interface
+and map other architectures to it -- for the same peripheral but different
+computers, I can keep uart unchanged but alter memmap.
+
+However, not all UART peripherals use these set of registers. I will have to
+change the peripheral files if I use different peripherals (no duh).
+
+I intuitively think it is worth it. This intuition comes from the fact that
+CC3200 also has the same peripheral layout. Besides, what if I just want to
+upgrade to RPI5b or something? The only change there is the address, so surely
+it would be beneficial to keep them all in the same place.
+
+Back to the printing idea. I do think it is good to have a high-level IO control
+UART instead of coding it all directly in UART. For one thing, my device also
+supports SPI and the likes. At even higher level there are file IOs. I can
+abstract each device (such as UART) as a file to write to. Wait a second, this
+is literally what Linux did.
+
+What I want is this: `write(file, bytes)`.
+
+### 2025-04-30
+
+To do the above, I need to implement `write(bytes)` and `read(bytes)` on UART.
+The file system will provide the abstraction of selecting the file to write to
+or read from. This require a whole file system but I want some simple debugging
+before that, so I should also write a utils library based on writing bytes to
+console. Should the utils functions use the file descriptor system? Probably
+don't use the system you are trying to debug.
+
+To sum up, the memmap interface provides MMIO. The UART interface provides read
+and write. The file system provides integration into the OS. The utils system
+provides debug/report functions.
+
+How will the utils and file system connect different write functions into one
+interface? I am pretty sure a file pointer would work. It is probably also
+prudent to use a typedef for it.
+
+Where would the typedef be? Not hardware or peripheral. File system or utils?
+Probably utils.

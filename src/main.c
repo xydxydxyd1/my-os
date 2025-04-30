@@ -9,7 +9,7 @@
 #include "peripherals/uart.h"
  
 void c_entry() {
-    print_uart0("Hello world!\n");
+    UART_write("Hello world!\n", 13);
     while (1);
 }
 

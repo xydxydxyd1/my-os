@@ -11,9 +11,10 @@
 
 
 #include <stdint.h>
+#include "utils/types.h"
 
 
-void print_uart0(const uint8_t *s);
+extern Write UART_write;
 
 
 #endif /* ifndef UART_H */
