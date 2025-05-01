@@ -429,3 +429,16 @@ prudent to use a typedef for it.
 
 Where would the typedef be? Not hardware or peripheral. File system or utils?
 Probably utils.
+
+To write my stuff I need to know what standard libraries I can use. I can first
+check the search path:
+
+/home/eric/.local/xPacks/@xpack-dev-tools/aarch64-none-elf-gcc/14.2.1-1.1.1/.content/lib/gcc/aarch64-none-elf/14.2.1/
+/home/eric/.local/xPacks/@xpack-dev-tools/aarch64-none-elf-gcc/14.2.1-1.1.1/.content/aarch64-none-elf/lib/
+/home/eric/.local/xPacks/@xpack-dev-tools/aarch64-none-elf-gcc/14.2.1-1.1.1/.content/aarch64-none-elf/lib/aarch64-none-elf/14.2.1/
+/home/eric/.local/xPacks/@xpack-dev-tools/aarch64-none-elf-gcc/14.2.1-1.1.1/.content/aarch64-none-elf/usr/lib/aarch64-none-elf/14.2.1/
+/home/eric/.local/xPacks/@xpack-dev-tools/aarch64-none-elf-gcc/14.2.1-1.1.1/.content/aarch64-none-elf/usr/lib/
+
+I have two paths: a posix compliant OS to use other people's libraries, or my
+own library. POSIX gives me less freedom, but that isn't too bad for someone who
+doesn't know what he is doing. Own library is also too annoying.
