@@ -6,11 +6,10 @@
 * Description:      Main routine.
 *****************************************************************************/
 
-#include "peripherals/uart.h"
-#include "utils/io.h"
+#include "utils/logging.h"
  
 void c_entry() {
-    IO_print(&UART_putchar, "Hello world!\n");
+    LOG_print("Hello, world!\r\n");
     while (1);
 }
 
