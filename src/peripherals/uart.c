@@ -10,10 +10,7 @@
 
 #include "hardware/memmap.h"
 
-int UART_write(const uint8_t *s, int nbytes) {
-    int i;
-    for (i = 0; i < nbytes; i++) {
-        MM_UART0->DR = s[i];
-    }
-    return i;
+RET_Void UART_putchar(char c) {
+    MM_UART0->DR = c;
+    return (RET_Void){.err = ERR_NONE};
 }

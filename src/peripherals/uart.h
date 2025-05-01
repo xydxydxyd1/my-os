@@ -10,10 +10,10 @@
 #define UART_H
 
 
-#include <stdint.h>
+#include "utils/err.h"
 
 
-int UART_write(const uint8_t *s, int nbytes);
+RET_Void UART_putchar(char c);
 
 
 #endif /* ifndef UART_H */

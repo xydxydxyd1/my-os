@@ -7,9 +7,10 @@
 *****************************************************************************/
 
 #include "peripherals/uart.h"
+#include "utils/io.h"
  
 void c_entry() {
-    UART_write("Hello world!\n", 13);
+    IO_print(&UART_putchar, "Hello world!\n");
     while (1);
 }
 

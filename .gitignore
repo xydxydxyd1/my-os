@@ -4,7 +4,7 @@ references/
 *.img
 *.bin
 
-utils/
+newlib-4.5.0/
 xpacks/
 # Prerequisites
 *.d

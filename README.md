@@ -27,3 +27,11 @@ find all guides to be suitable for me.
 1. [Baremetal
    qemu](https://balau82.wordpress.com/2010/02/28/hello-world-for-bare-metal-arm-using-qemu/)
    from [balau](https://balau82.wordpress.com/)
+
+
+## Setup
+
+This section is just scratch, need polishing
+
+1. Get aarch64-elf-none toolchain
+2. Get newlib-4.5.0

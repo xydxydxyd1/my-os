@@ -442,3 +442,28 @@ check the search path:
 I have two paths: a posix compliant OS to use other people's libraries, or my
 own library. POSIX gives me less freedom, but that isn't too bad for someone who
 doesn't know what he is doing. Own library is also too annoying.
+
+I've decided on POSIX. Let's install newlib.
+
+Getting newlib to work is not as easy as I thought! Perhaps I shouldn't get hung
+up on this and keep going with some self-implemented functions? That would allow
+me to feel like I am progressing. Besides, newlib stuff isn't exactly needed
+right this moment!
+
+The reason I want the common write interface to be writing nbytes instead of
+just putting a character is that I feel like there might be protocols that put
+multiple characters at the same time, and I feel like it is easier to reduce
+multichar down to one char than it is to consolidate individual chars to
+multichars. The downside is that there is an extra for loop for protocols that
+only support one char, which may be overhead. Oh yea, buffers also. I think
+putchar is better since it gives the choice of grouping to the lower interface.
+
+What about error handling? There is no such thing as exceptions in C. Do I
+transmit everything in the return value? What about something similar to Go,
+always returning a struct with an error boolean? The overhead is that every time
+I call a function, the return value needs to be processed as such. I think it
+isn't a bad idea. Let's experiment with it.
+
+The core problem I am trying to solve is that functions are not pure, so they
+behave differently depending on current state, and I need to somehow convey the
+state information or I will end up with hard-to-handle errors.
