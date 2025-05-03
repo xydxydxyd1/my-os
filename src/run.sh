@@ -1,8 +1,7 @@
 #!/bin/bash
 
 make
-qemu-system-aarch64 \
-    -M raspi4b \
+qemu-system-arm \
+    -M orangepi-pc \
     -kernel ./main.elf \
-    -nographic \
     $*

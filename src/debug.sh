@@ -2,9 +2,9 @@
 # run.sh 
 #
 
-qemu_cmd="qemu-system-aarch64 \
+qemu_cmd="qemu-system-arm \
     -s -S \
-    -M raspi4b \
+    -M orangepi-pc \
     -monitor stdio \
     -kernel ./main.elf \
     $*"

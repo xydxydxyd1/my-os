@@ -6,10 +6,7 @@
 * Description:      Main routine.
 *****************************************************************************/
 
-#include "utils/logging.h"
- 
 void c_entry() {
-    LOG_print("Hello, world!\r\n");
     while (1);
 }
 

@@ -1,10 +1,10 @@
-PREFIX = aarch64-none-elf
+PREFIX = arm-none-eabi
 CC = $(PREFIX)-gcc $(INCLUDES)
 
 SRCS = $(wildcard *.c) $(wildcard peripherals/*.c) $(wildcard hardware/*.c) $(wildcard utils/*.c)
 OBJS = startup.o $(SRCS:.c=.o)
 
-FLAGS = -mcpu=cortex-a72 -g
+FLAGS = -mcpu=cortex-a7 -g
 
 main.bin: main.elf
 	$(PREFIX)-objcopy -O binary $^ $@
