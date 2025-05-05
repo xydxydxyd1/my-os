@@ -6,10 +6,11 @@ OBJS = startup.o $(SRCS:.c=.o)
 
 FLAGS = -mcpu=cortex-a72 -g
 
-main.img: main.elf
+# Name sensitive, used by RPI bootloader
+kernel8.img: kernel8.elf
 	$(PREFIX)-objcopy -O binary $^ $@
 
-main.elf: link.ld $(OBJS)
+kernel8.elf: link.ld $(OBJS)
 	$(PREFIX)-ld -T link.ld $(OBJS) -o $@
 
 %.o: %.S

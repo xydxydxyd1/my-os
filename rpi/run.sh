@@ -3,5 +3,5 @@
 make
 qemu-system-aarch64 \
     -M raspi4b \
-    -kernel ./main.elf \
+    -kernel ./kernel8.elf \
     $*
