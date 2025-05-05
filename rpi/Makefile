@@ -6,6 +6,14 @@ OBJS = startup.o $(SRCS:.c=.o)
 
 FLAGS = -mcpu=cortex-a72 -g
 
+flash: kernel8.img
+	mkdir -p mountpoint
+	sudo mount /dev/sda1 mountpoint
+	sudo rm -rf mountpoint/kernel*
+	sudo cp kernel8.img mountpoint
+	sudo umount /dev/sda1
+	rm -rf mountpoint
+
 # Name sensitive, used by RPI bootloader
 kernel8.img: kernel8.elf
 	$(PREFIX)-objcopy -O binary $^ $@
