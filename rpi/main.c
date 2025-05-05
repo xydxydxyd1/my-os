@@ -9,7 +9,11 @@
 #include "utils/logging.h"
  
 void c_entry() {
-    LOG_print("Hello, world!\r\n");
+    // Test with Hello world
+    while (1)
+        LOG_print("Hello, world!\r\n");
+
+    // Halt
     while (1);
 }
 
