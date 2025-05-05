@@ -1,7 +1,7 @@
 ENTRY(_Reset)
 SECTIONS
 {
-    . = 0x10000;  /* Everything before is reserved by bootloader and BIOS */
+    . = 0x80000;  /* Linux default text_offset for Arm64 */
     .startup . : { startup.o(.text) }
     .text : { *(.text) }
     .data : { *(.data) }

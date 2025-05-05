@@ -6,7 +6,7 @@ OBJS = startup.o $(SRCS:.c=.o)
 
 FLAGS = -mcpu=cortex-a72 -g
 
-main.bin: main.elf
+main.img: main.elf
 	$(PREFIX)-objcopy -O binary $^ $@
 
 main.elf: link.ld $(OBJS)
