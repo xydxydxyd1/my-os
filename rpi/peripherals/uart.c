@@ -8,7 +8,7 @@
 
 #include "uart.h"
 
-#include "hardware/memmap.h"
+#include "memmap.h"
 
 RET_Void UART_putchar(char c) {
     MM_UART0->DR = c;

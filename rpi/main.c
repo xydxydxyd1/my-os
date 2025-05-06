@@ -6,7 +6,7 @@
 * Description:      Main routine.
 *****************************************************************************/
 
-#include "utils/logging.h"
+#include "logging.h"
  
 void c_entry() {
     // Test with Hello world

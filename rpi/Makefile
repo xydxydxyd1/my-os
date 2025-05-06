@@ -1,10 +1,29 @@
-PREFIX = aarch64-none-elf
-CC = $(PREFIX)-gcc $(INCLUDES)
+# Hardware specification (modify for different hardware)
+# CPU is specified in flags, not here.
 
-SRCS = $(wildcard *.c) $(wildcard peripherals/*.c) $(wildcard hardware/*.c) $(wildcard utils/*.c)
+PREFIX = aarch64-none-elf
+CC = $(PREFIX)-gcc
+HARDWARE = hardware/rpi4b
+
+
+# Flags
+
+INCLUDES = -iquote. \
+		   -iquoteutils \
+		   -iquote$(HARDWARE)
+LDFLAGS = -mcpu=cortex-a72 -g
+CCFLAGS = $(LDFLAGS) $(INCLUDES)
+
+
+# Source files
+
+SRCS = $(wildcard *.c) \
+	   $(wildcard peripherals/*.c) \
+	   $(wildcard hardware/*.c) \
+	   $(wildcard utils/*.c) \
+	   $(wildcard $(HARDWARE)/*.c)
 OBJS = startup.o $(SRCS:.c=.o)
 
-FLAGS = -mcpu=cortex-a72 -g
 
 # Targets
 
@@ -29,12 +48,13 @@ kernel8.elf: link.ld $(OBJS)
 	$(PREFIX)-ld -T link.ld $(OBJS) -o $@
 
 %.o: %.S
-	$(PREFIX)-as $(FLAGS) $^ -o $@
+	$(PREFIX)-as $(LDFLAGS) $^ -o $@
 
 %.o: %.c
-	$(CC) -c -iquote . $(FLAGS) $^ -o $@
+	$(CC) -c $(CCFLAGS) $^ -o $@
 
 clean:
 	find . -name "*.o" -type f -delete
 	find . -name "*.elf" -type f -delete
+	find . -name "*.img" -type f -delete
 	find . -name "*.bin" -type f -delete
