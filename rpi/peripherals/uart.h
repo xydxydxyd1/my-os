@@ -3,6 +3,7 @@
 *
 * Author:           Eric Xu  
 * Created:          04/29/25 
+* Prefix:           UART
 * Description:      UART interface header file
 *****************************************************************************/
 
@@ -10,8 +11,7 @@
 #define UART_H
 
 
-#include "utils/err.h"
-
+#include "err.h"
 
 RET_Void UART_putchar(char c);
 

@@ -12,7 +12,8 @@ INCLUDES = -iquote. \
 		   -iquoteutils \
 		   -iquote$(HARDWARE)
 LDFLAGS = -mcpu=cortex-a72 -g
-CCFLAGS = $(LDFLAGS) $(INCLUDES)
+CCFLAGS = $(LDFLAGS) $(INCLUDES) \
+		  -mgeneral-regs-only # Floating point is not enabled in startup
 
 
 # Source files

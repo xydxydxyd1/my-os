@@ -12,5 +12,5 @@
 
 RET_Void UART_putchar(char c) {
     MM_UART0->DR = c;
-    return (RET_Void){.err = ERR_NONE};
+    return (RET_Void){};
 }

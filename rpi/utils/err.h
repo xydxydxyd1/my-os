@@ -22,6 +22,14 @@ typedef enum {
 typedef struct {
     ERR_Code err;
 } RET_Void;
+typedef struct {
+    ERR_Code err;
+    char retval;
+} RET_Char;
+typedef struct {
+    ERR_Code err;
+    void* retval;
+} RET_Ptr;
 
 
 #endif /* ifndef ERR_H */

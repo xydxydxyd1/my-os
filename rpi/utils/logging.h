@@ -11,7 +11,7 @@
 #define LOGGING_H
 
 
-#include "utils/err.h"          // Error handled returns
+#include "err.h"          // Error handled returns
 
 
 /**

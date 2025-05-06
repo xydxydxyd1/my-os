@@ -13,6 +13,10 @@ program more writable so long prefixes defeats the point. Additionally, due to
 their ubiquitousness, I believe it is safe to assume that utils declarations
 would not be repeated.
 
+To encourage encapsulation, it would be good to distinguish public properties
+used externally and private properties used internally. As such, internal
+properties will be prepended with an underscore.
+
 
 ## Spacing
 
