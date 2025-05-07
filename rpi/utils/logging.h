@@ -11,8 +11,12 @@
 #define LOGGING_H
 
 
-#include "err.h"          // Error handled returns
-
+/**
+ * Initialize logging interface.
+ *
+ * Sets GPIO 14 and 15 to TXD0 and RXD0
+ */
+void LOG_init();
 
 /**
  * Print str to console

@@ -17,10 +17,21 @@
  * Set function select for a GPIO pin
  *
  * Args:
- * gpio - The GPIO to set
- * fsel - a 3-bit value that selects the functionality of the GPIO
+ * gpio - The GPIO pin whose function select is to be set
+ * fsel - a 3-bit function select of the GPIO. Other bits are ignored.
  */
-RET_Void GPIO_func_select(int gpio, char fsel);
+void GPIO_set_fsel(int gpio, char fsel);
+
+/**
+ * Get function select for a GPIO pin
+ *
+ * Args:
+ * gpio - The GPIO pin whose function select is to be set
+ *
+ * Returns:
+ * 3 bit fsel value corresonding to GPIO
+ */
+char GPIO_get_fsel(int gpio);
 
 
 #endif /* ifndef GPIO_H */

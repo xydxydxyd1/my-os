@@ -9,6 +9,8 @@
 #include "logging.h"
  
 void c_entry() {
+    LOG_init();
+
     // Test with Hello world
     while (1)
         LOG_print("Hello, world!\r\n");

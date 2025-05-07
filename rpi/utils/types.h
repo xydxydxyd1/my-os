@@ -3,6 +3,7 @@
 *
 * Author:           Eric Xu  
 * Created:          05/06/25 
+* Prefix:           T
 * Description:      Miscellaneous types
 *****************************************************************************/
 
@@ -13,7 +14,7 @@
 typedef enum {
     TRUE,
     FALSE,
-} Boolean;
+} T_Boolean;
 
 
 #endif /* ifndef TYPES_H */
