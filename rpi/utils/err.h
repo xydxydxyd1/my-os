@@ -17,15 +17,18 @@ typedef enum {
 } ERR_Code;
 
 
-// Return types. They attach an err value to an return.
-
+/** `void` return type attached with an error code */
 typedef struct {
     ERR_Code err;
 } RET_Void;
+
+/** `char` return type attached with an error code */
 typedef struct {
     ERR_Code err;
     char retval;
 } RET_Char;
+
+/** `void*` return type attached with an error code */
 typedef struct {
     ERR_Code err;
     void* retval;

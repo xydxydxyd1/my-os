@@ -8,9 +8,10 @@
 
 #include "logging.h"
 
-#include "peripherals/uart.h" // Console
-#include "io.h" // High level IO
+#include "peripherals/uart.h"
 
-RET_Void LOG_print(char* str) {
-    return IO_print(&UART_putchar, str);
+volatile UART_Regs * const CONSOLE = UART0;
+
+void LOG_print(char* str) {
+    UART_print(CONSOLE, str);
 }

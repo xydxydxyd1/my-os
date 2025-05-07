@@ -1,6 +1,11 @@
 # Style guide
 
 
+## Documentation
+
+Interface documentation uses /** */ blocks.
+
+
 ## Naming
 
 Due to lack of namespaces in C, all identifiers are prepended with a unique

@@ -8,9 +8,16 @@
 
 #include "uart.h"
 
-#include "memmap.h"
 
-RET_Void UART_putchar(char c) {
-    MM_UART0->DR = c;
-    return (RET_Void){};
+// Exposed interface
+
+void UART_putchar(volatile UART_Regs* const uart, char c) {
+    uart->_DR = c;
+}
+
+void UART_print(volatile UART_Regs* const uart, char* str) {
+    int i;
+    for (i = 0; str[i] != '\0'; ++i) {
+        UART_putchar(uart, str[i]);
+    }
 }

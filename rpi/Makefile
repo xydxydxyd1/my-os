@@ -3,14 +3,12 @@
 
 PREFIX = aarch64-none-elf
 CC = $(PREFIX)-gcc
-HARDWARE = hardware/rpi4b
 
 
 # Flags
 
 INCLUDES = -iquote. \
-		   -iquoteutils \
-		   -iquote$(HARDWARE)
+		   -iquoteutils
 LDFLAGS = -mcpu=cortex-a72 -g
 CCFLAGS = $(LDFLAGS) $(INCLUDES) \
 		  -mgeneral-regs-only # Floating point is not enabled in startup
@@ -20,9 +18,7 @@ CCFLAGS = $(LDFLAGS) $(INCLUDES) \
 
 SRCS = $(wildcard *.c) \
 	   $(wildcard peripherals/*.c) \
-	   $(wildcard hardware/*.c) \
-	   $(wildcard utils/*.c) \
-	   $(wildcard $(HARDWARE)/*.c)
+	   $(wildcard utils/*.c)
 OBJS = startup.o $(SRCS:.c=.o)
 
 

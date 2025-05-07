@@ -17,7 +17,7 @@
 /**
  * Print str to console
  */
-RET_Void LOG_print(char* str);
+void LOG_print(char* str);
 
 
 #endif /* ifndef LOGGING_H */
