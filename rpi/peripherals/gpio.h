@@ -18,7 +18,7 @@
  *
  * Args:
  * gpio - The GPIO pin whose function select is to be set
- * fsel - a 3-bit function select of the GPIO. Other bits are ignored.
+ * fsel - a 3-bit function select of the GPIO
  */
 void GPIO_set_fsel(int gpio, char fsel);
 

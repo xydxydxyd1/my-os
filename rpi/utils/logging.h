@@ -14,12 +14,15 @@
 /**
  * Initialize logging interface.
  *
- * Sets GPIO 14 and 15 to TXD0 and RXD0
+ * Sets GPIO 14 and 15 to TXD0 and RXD0 and configures UART0
  */
 void LOG_init();
 
 /**
  * Print str to console
+ *
+ * Args:
+ * str - a null terminated string
  */
 void LOG_print(char* str);
 

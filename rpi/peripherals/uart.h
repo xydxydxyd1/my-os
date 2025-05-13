@@ -50,7 +50,7 @@ void UART_init(volatile UART_Regs* uart);
  * Transmit a character with UART
  *
  * Args:
- * uart - the UART device with which to transmit `c`.
+ * uart - the intialized UART device with which to transmit `c`.
  * c - the character to transmit
  */
 void UART_putchar(volatile UART_Regs* uart, char c);
@@ -58,8 +58,10 @@ void UART_putchar(volatile UART_Regs* uart, char c);
 /**
  * Transmit a string
  *
+ * The device should be initialized before calling this function.
+ *
  * Args:
- * uart - the UART device with which to transmit `str`
+ * uart - the initialized UART device with which to transmit `str`
  * str - the null-terminated string to transmit
  */
 void UART_print(volatile UART_Regs* uart, char* str);
