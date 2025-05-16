@@ -11,6 +11,7 @@
 #define GPIO_H
 
 
+#include <stdint.h>
 #include "err.h"
 
 
@@ -34,7 +35,7 @@ void GPIO_set_fsel(int gpio, char fsel);
  * Returns:
  * 3 bit fsel value corresonding to GPIO
  */
-char GPIO_get_fsel(int gpio);
+uint8_t GPIO_get_fsel(int gpio);
 
 /**
  * Configure a Clock Manager corresponding to the GPIO bank

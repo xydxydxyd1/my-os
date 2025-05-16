@@ -47,6 +47,7 @@ typedef struct {
 // Misc.
 #define OSC_FREQ 0x0337f980 // external oscillator frequency
 
+
 // Exposed interface
 
 void GPIO_set_fsel(int gpio, char fsel) {
@@ -56,9 +57,9 @@ void GPIO_set_fsel(int gpio, char fsel) {
     GPIO->GPFSEL[fsel_i] |= fsel << fsel_offset & GET_MASK(fsel_offset, 3);
 }
 
-char GPIO_get_fsel(int gpio) {
-    int fsel_i = gpio / 10;
-    int fsel_offset = gpio % 10 * 3;
+uint8_t GPIO_get_fsel(int gpio) {
+    int fsel_i = gpio / 10; // Each GPFSEL register controls 10 GPIO
+    int fsel_offset = gpio % 10 * 3; // The FSEL for a GPIO is 3 bits
     return GPIO->GPFSEL[fsel_i] >> fsel_offset & 0b111;
 }
 
