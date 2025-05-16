@@ -14,7 +14,7 @@
 /**
  * Initialize logging interface.
  *
- * Sets GPIO 14 and 15 to TXD0 and RXD0 and configures UART0
+ * Sets GPIO 14 and 15 to TXD0 and RXD0 and configures UART0 with clock
  */
 void LOG_init();
 

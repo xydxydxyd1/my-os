@@ -8,6 +8,8 @@
 
 #include "uart.h"
 
+#include "gpio.h"
+
 
 // Utils
 
@@ -28,16 +30,15 @@ void UART_init(volatile UART_Regs* uart) {
     uart->_CR &= ~CR_UARTEN;        // 1. Disable UART
     while (uart->_FR & FR_BUSY);    // 2. Wait for end of transmission
     uart->_LCRH &= ~LCRH_FEN;       // 3. Flush transmit FIFO
-    
 
     // 4. Reprogram
-
     uart->_CR = 0;
-    
     // Enable transmission and reception
     uart->_CR |= CR_RXE;
     uart->_CR |= CR_TXE;
-
+    // Baud rate
+    uart->_IBRD = GPIO_FREQ / (16 * UART_BAUDRATE);
+    uart->_FBRD = (GPIO_FREQ % (16 * UART_BAUDRATE)) * 64;
 
     // 5. Enable UART
     uart->_CR |= CR_UARTEN;

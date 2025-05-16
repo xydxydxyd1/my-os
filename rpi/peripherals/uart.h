@@ -43,6 +43,8 @@ typedef struct {
 
 /**
  * Initialize a UART device with default configuration
+ *
+ * Assumes the corresponding clock manager initialized to GPIO_FREQ
  */
 void UART_init(volatile UART_Regs* uart);
 

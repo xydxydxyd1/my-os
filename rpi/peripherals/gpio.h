@@ -13,6 +13,9 @@
 
 #include "err.h"
 
+
+#define GPIO_FREQ 0x0337f980 // clock frequency of configured clocks
+
 /**
  * Set function select for a GPIO pin
  *
@@ -32,6 +35,14 @@ void GPIO_set_fsel(int gpio, char fsel);
  * 3 bit fsel value corresonding to GPIO
  */
 char GPIO_get_fsel(int gpio);
+
+/**
+ * Configure a Clock Manager corresponding to the GPIO bank
+ *
+ * Args:
+ * gpio_bank - The GPIO bank (0:2)
+ */
+void GPIO_config_clk(int gpio_bank);
 
 
 #endif /* ifndef GPIO_H */

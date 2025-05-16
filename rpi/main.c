@@ -7,9 +7,11 @@
 *****************************************************************************/
 
 #include "logging.h"
+#include "peripherals/gpio.h"
  
 void c_entry() {
     LOG_init();
+    GPIO_set_fsel(4, 0); // Set pin 4 to inspect clock 0
 
     // Test with Hello world
     while (1)
