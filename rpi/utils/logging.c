@@ -16,8 +16,8 @@
 
 
 void LOG_init() {
-    GPIO_set_fsel(14, 0);   // GPIO[14].FSEL = TXD0
-    GPIO_set_fsel(15, 0);   // GPIO[15].FSEL = RXD0
+    GPIO_set_fsel(14, GPIO_FSEL_ALT0);   // GPIO[14].FSEL = TXD0
+    GPIO_set_fsel(15, GPIO_FSEL_ALT0);   // GPIO[15].FSEL = RXD0
     // I don't know which clock it is so I will set all of them
     GPIO_config_clk(0);
     GPIO_config_clk(1);
