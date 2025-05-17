@@ -1,7 +1,7 @@
 ## Todo
 
-* Write something to permanent storage, anything
-* PXE booting
+* GPIO control
+
 
 ## RPIOS
 
@@ -21,17 +21,19 @@ them because I learn the most by struggling through a problem myself. I use them
 if I have been stuck on a problem for a significant amount of time without
 making progress.
 
-The numbering of the list indicates the ID of the guide in this repository, used
-to find the path (`./guide<id>`). The ID may not be continuous since I didn't
-find all guides to be suitable for me.
-1. [Baremetal
+* [Baremetal
    qemu](https://balau82.wordpress.com/2010/02/28/hello-world-for-bare-metal-arm-using-qemu/)
    from [balau](https://balau82.wordpress.com/)
+    + Minimalist bootstrapping reference
+* [RPI4OS](https://www.rpi4os.com/)
+    + Control environment for booting code
+* [RPI3OS](https://github.com/bztsrc/raspi3-tutorial/)
 
 
-## Setup
+## Flashing
 
-This section is just scratch, need polishing
-
-1. Get aarch64-elf-none toolchain
-2. Get newlib-4.5.0
+1. Prepare a normal Raspbian installation medium on an SD card (only need to do
+   once)
+2. Replace kernel
+    a. Remove all `kernel*` files on the SD card
+    b. Copy in the built `kernel8.img`
