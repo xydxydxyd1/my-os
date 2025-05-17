@@ -35,7 +35,7 @@ typedef enum {
  * Set function select for a GPIO pin
  *
  * Args:
- * gpio - The GPIO pin whose function select is to be set
+ * gpio - The GPIO pin number whose function select is to be set
  * fsel - a 3-bit function select of the GPIO
  */
 void GPIO_set_fsel(int gpio, GPIO_FSEL fsel);
@@ -44,12 +44,28 @@ void GPIO_set_fsel(int gpio, GPIO_FSEL fsel);
  * Get function select for a GPIO pin
  *
  * Args:
- * gpio - The GPIO pin whose function select is to be set
+ * gpio - The GPIO pin number whose function select is to be set
  *
  * Returns:
  * 3 bit fsel value corresonding to GPIO
  */
 GPIO_FSEL GPIO_get_fsel(int gpio);
+
+/**
+ * Set a GPIO pin
+ *
+ * Args:
+ * gpio - The GPIO pin number whose function select is to be set
+ */
+void GPIO_set(int gpio);
+
+/**
+ * CLear a GPIO pin
+ *
+ * Args:
+ * gpio - The GPIO pin number whose function select is to be set
+ */
+void GPIO_clr(int gpio);
 
 /**
  * Configure a Clock Manager corresponding to the GPIO bank

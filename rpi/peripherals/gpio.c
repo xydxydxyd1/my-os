@@ -9,8 +9,8 @@
 
 typedef struct {
     uint32_t GPFSEL[6]; // GPFSEL0 to GPFSEL5
-    uint64_t GPSET;
-    uint64_t GPCLR;
+    uint64_t GPSET; // GPSET0 and GPSET1 combined
+    uint64_t GPCLR; // GPCLR0 and GPCLR1 combined
     uint64_t GPLEV;
 } GPIORegs;
 
@@ -41,8 +41,8 @@ typedef struct {
 #define CMGPXCTL_SRC_OSC 1 // oscillator
 
 // Base addresses
-#define GPIO ((GPIORegs*)0xfe201000)
-#define CM_GPX ((GPIOClkRegs*)0xfe101070)   // can be indexed up to CM_GP[2]
+#define GPIO ((volatile GPIORegs*)0xfe201000)
+#define CM_GPX ((volatile GPIOClkRegs*)0xfe101070)   // can be indexed up to CM_GP[2]
 
 // Misc.
 #define OSC_FREQ 0x0337f980 // external oscillator frequency
@@ -63,8 +63,15 @@ GPIO_FSEL GPIO_get_fsel(int gpio) {
     return GPIO->GPFSEL[fsel_i] >> fsel_offset & 0b111;
 }
 
+void GPIO_set(int gpio) {
+    GPIO->GPSET |= 1u << gpio;
+}
+void GPIO_clr(int gpio) {
+    GPIO->GPCLR |= 1u << gpio;
+}
+
 void GPIO_config_clk(int gpio_bank) {
-    GPIOClkRegs* clk = CM_GPX + gpio_bank;
+    volatile GPIOClkRegs* clk = CM_GPX + gpio_bank;
     clk->CMGPXCTL = MASKED_UPDATE(
         clk->CMGPXCTL,
         CMGPX_PASSWD,
