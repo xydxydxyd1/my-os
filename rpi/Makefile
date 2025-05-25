@@ -9,16 +9,18 @@ CC = $(PREFIX)-gcc
 
 INCLUDES = -iquote. \
 		   -iquoteutils
-LDFLAGS = -mcpu=cortex-a72 -g
-CCFLAGS = $(LDFLAGS) $(INCLUDES) \
-		  -mgeneral-regs-only # Floating point is not enabled in startup
+# -mgeneral-regs-only cuz floating point is not enabled
+CCFLAGS = $(INCLUDES) -g -Wall -O2 -ffreestanding -nostdinc -nostdlib -nostartfiles -mstrict-align
 
 
 # Source files
 
-SRCS = $(wildcard *.c) \
-	   $(wildcard peripherals/*.c) \
-	   $(wildcard utils/*.c)
+# Notably does not contain assembly files
+# SRCS = $(wildcard *.c) \
+# 	   $(wildcard peripherals/*.c) \
+# 	   $(wildcard utils/*.c)
+# TODO: Only use main.c for testing
+SRCS = main.c
 OBJS = startup.o $(SRCS:.c=.o)
 
 
@@ -39,16 +41,16 @@ flash: image
 
 # Name sensitive, used by RPI bootloader
 kernel8.img: kernel8.elf
-	$(PREFIX)-objcopy -O binary $^ $@
+	$(PREFIX)-objcopy -O binary $< $@
 
 kernel8.elf: link.ld $(OBJS)
-	$(PREFIX)-ld -T link.ld $(OBJS) -o $@
+	$(PREFIX)-ld -nostdlib $(OBJS) -T link.ld -o $@
 
 %.o: %.S
-	$(PREFIX)-as $(LDFLAGS) $^ -o $@
+	$(CC) $(CCFLAGS) -c $< -o $@
 
 %.o: %.c
-	$(CC) -c $(CCFLAGS) $^ -o $@
+	$(CC) $(CCFLAGS) -c $< -o $@
 
 clean:
 	find . -name "*.o" -type f -delete
