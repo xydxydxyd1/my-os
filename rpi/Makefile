@@ -1,27 +1,20 @@
-# Hardware specification (modify for different hardware)
-# CPU is specified in flags, not here.
-
 PREFIX = aarch64-none-elf
 CC = $(PREFIX)-gcc
-
+FLASH_DEVICE = /dev/sdb1
 
 # Flags
-
 INCLUDES = -iquote. \
 		   -iquoteutils
 # -mgeneral-regs-only cuz floating point is not enabled
-# CCFLAGS = $(INCLUDES) -g -Wall -O2 -ffreestanding -nostdinc -nostdlib -nostartfiles -mstrict-align
 CCFLAGS = -mgeneral-regs-only $(INCLUDES) -g -Wall -O2 -nostartfiles -mstrict-align
 
 
 # Source files
 
 # Notably does not contain assembly files
-# SRCS = $(wildcard *.c) \
-# 	   $(wildcard peripherals/*.c) \
-# 	   $(wildcard utils/*.c)
-# TODO: Only use main.c for testing
-SRCS = main.c
+SRCS = $(wildcard *.c) \
+	   $(wildcard peripherals/*.c) \
+	   $(wildcard utils/*.c)
 OBJS = startup.o $(SRCS:.c=.o)
 
 
@@ -31,11 +24,11 @@ all: clean kernel8.img
 
 flash: kernel8.img
 	mkdir -p mountpoint
-	sudo mount /dev/sda1 mountpoint
+	sudo mount $(FLASH_DEVICE) mountpoint
 	sudo rm -rf mountpoint/kernel*
 	sudo cp kernel8.img mountpoint
 	sleep 1
-	sudo umount /dev/sda1
+	sudo umount $(FLASH_DEVICE)
 	rm -rf mountpoint
 
 
