@@ -14,7 +14,7 @@
 typedef enum {
     TRUE,
     FALSE,
-} T_Boolean;
+} Boolean;
 
 
 #endif /* ifndef TYPES_H */

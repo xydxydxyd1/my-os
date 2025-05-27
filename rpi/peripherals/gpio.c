@@ -2,96 +2,33 @@
 
 #include <stdint.h>
 
-#include "bitmanip.h"
-
 
 // GPIO interface utilities
 
-typedef struct {
-    uint32_t GPFSEL[6]; // GPFSEL0 to GPFSEL5
-    uint64_t GPSET; // GPSET0 and GPSET1 combined
-    uint64_t GPCLR; // GPCLR0 and GPCLR1 combined
-    uint64_t GPLEV;
-} GPIORegs;
+#define GPFSEL0 ((volatile uint32_t*)0xfe200000)
+#define GPFSEL1 ((volatile uint32_t*)0xfe200004)
+#define GPFSEL2 ((volatile uint32_t*)0xfe200008)
+#define GPFSEL3 ((volatile uint32_t*)0xfe20000c)
+#define GPFSEL4 ((volatile uint32_t*)0xfe200010)
+#define GPFSEL5 ((volatile uint32_t*)0xfe200014)
 
-typedef struct {
-    uint32_t CMGPXCTL; // Clock manager general purpose clocks control X
-    uint32_t CMGPXDIV; // Clock manager general purpose clocks divisors X
-} GPIOClkRegs;
+#define GPSET0 ((volatile uint32_t*)0xfe20001c)
+#define GPCLR0 ((volatile uint32_t*)0xfe200028)
+#define GPPUD1 ((volatile uint32_t*)0xfe2000e8)
 
-
-// Masks
-
-#define CMGPX_PASSWD GET_MASK(24, 8)
-#define CMGPXCTL_MASH GET_MASK(9, 2)
-#define CMGPXCTL_FLIP (1u << 8) // invert generator output
-#define CMGPXCTL_BUSY (1u << 7) // clock is running
-#define CMGPXCTL_KILL (1u << 5) // glitchy kill
-#define CMGPXCTL_ENAB (1u << 4) // glitchless enable
-#define CMGPXCTL_SRC (0b1111) // clock source
-
-#define CMGPXDIV_DIVI GET_MASK(12, 12) // integer part of divisor
-#define CMGPXDIV_DIVF 0xfff // fractional part of divisor
-
-
-// Preset values
-#define CMGPX_PASSWD_KEY (0x5a << 8)
-#define CMGPXCTL_MASH_INTDIV 0
-#define CMGPXCTL_SRC_GND 0
-#define CMGPXCTL_SRC_OSC 1 // oscillator
-
-// Base addresses
-#define GPIO ((volatile GPIORegs*)0xfe201000)
-#define CM_GPX ((volatile GPIOClkRegs*)0xfe101070)   // can be indexed up to CM_GP[2]
-
-// Misc.
-#define OSC_FREQ 0x0337f980 // external oscillator frequency
+volatile uint32_t *FSEL_REGS[6] = {
+    GPFSEL0,
+    GPFSEL1,
+    GPFSEL2,
+    GPFSEL3,
+    GPFSEL4,
+    GPFSEL5,
+};
 
 
 // Exposed interface
 
-void GPIO_set_fsel(int gpio, GPIO_FSEL fsel) {
-    int fsel_i = gpio / 10; // Each GPFSEL register controls 10 GPIO
-    int fsel_offset = gpio % 10 * 3; // The FSEL for a GPIO is 3 bits
-    GPIO->GPFSEL[fsel_i] &= ~GET_MASK(fsel_offset, 3);
-    GPIO->GPFSEL[fsel_i] |= fsel << fsel_offset & GET_MASK(fsel_offset, 3);
-}
-
-GPIO_FSEL GPIO_get_fsel(int gpio) {
-    int fsel_i = gpio / 10; // Each GPFSEL register controls 10 GPIO
-    int fsel_offset = gpio % 10 * 3; // The FSEL for a GPIO is 3 bits
-    return GPIO->GPFSEL[fsel_i] >> fsel_offset & 0b111;
-}
-
-void GPIO_set(int gpio) {
-    GPIO->GPSET |= 1u << gpio;
-}
-void GPIO_clr(int gpio) {
-    GPIO->GPCLR |= 1u << gpio;
-}
-
-void GPIO_config_clk(int gpio_bank) {
-    volatile GPIOClkRegs* clk = CM_GPX + gpio_bank;
-    clk->CMGPXCTL = MASKED_UPDATE(
-        clk->CMGPXCTL,
-        CMGPX_PASSWD,
-        CMGPX_PASSWD_KEY
-    );
-    clk->CMGPXDIV = MASKED_UPDATE(
-        clk->CMGPXDIV,
-        CMGPX_PASSWD,
-        CMGPX_PASSWD_KEY
-    );
-    clk->CMGPXCTL &= ~CMGPXCTL_ENAB;
-
-    clk->CMGPXCTL = MASKED_UPDATE(clk->CMGPXCTL, CMGPXCTL_SRC, CMGPXCTL_SRC_OSC);
-    clk->CMGPXDIV = MASKED_UPDATE(
-        clk->CMGPXDIV,
-        CMGPXDIV_DIVI,
-        OSC_FREQ / GPIO_FREQ
-    );
-
-    clk->CMGPXCTL |= CMGPXCTL_ENAB;
-    clk->CMGPXCTL = MASKED_UPDATE(clk->CMGPXCTL, CMGPX_PASSWD, 0);
-    clk->CMGPXDIV = MASKED_UPDATE(clk->CMGPXDIV, CMGPX_PASSWD, 0);
+void gpio_init(int gpio, GPIO_FSEL fsel) {
+    volatile uint32_t fsel_reg = FSEL_REGS[gpio / 10];
+    int fsel_offset = (gpio % 10) * 3;
 }

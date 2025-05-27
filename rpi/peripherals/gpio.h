@@ -11,69 +11,25 @@
 #define GPIO_H
 
 
-#include <stdint.h>
-#include "err.h"
-
-
-#define GPIO_FREQ 0x0337f980 // clock frequency of configured clocks
-
-/**
- * Values for the FSEL register
- */
 typedef enum {
-    GPIO_FSEL_IN,
-    GPIO_FSEL_OUT,
-    GPIO_FSEL_ALT0,
-    GPIO_FSEL_ALT1,
-    GPIO_FSEL_ALT2,
-    GPIO_FSEL_ALT3,
-    GPIO_FSEL_ALT4,
-    GPIO_FSEL_ALT5,
+    GPIO_FSEL_IN = 0b000,
+    GPIO_FSEL_OUT = 0b001,
+    GPIO_FSEL_ALT0 = 0b100,
+    GPIO_FSEL_ALT1 = 0b101,
+    GPIO_FSEL_ALT2 = 0b110,
+    GPIO_FSEL_ALT3 = 0b111,
+    GPIO_FSEL_ALT4 = 0b011,
+    GPIO_FSEL_ALT5 = 0b010,
 } GPIO_FSEL;
 
 /**
- * Set function select for a GPIO pin
+ * Initialize a GPIO pin with a function select
  *
  * Args:
- * gpio - The GPIO pin number whose function select is to be set
- * fsel - a 3-bit function select of the GPIO
+ * gpio - 0:57 GPIO pin number
+ * fsel - function select value
  */
-void GPIO_set_fsel(int gpio, GPIO_FSEL fsel);
-
-/**
- * Get function select for a GPIO pin
- *
- * Args:
- * gpio - The GPIO pin number whose function select is to be set
- *
- * Returns:
- * 3 bit fsel value corresonding to GPIO
- */
-GPIO_FSEL GPIO_get_fsel(int gpio);
-
-/**
- * Set a GPIO pin
- *
- * Args:
- * gpio - The GPIO pin number whose function select is to be set
- */
-void GPIO_set(int gpio);
-
-/**
- * CLear a GPIO pin
- *
- * Args:
- * gpio - The GPIO pin number whose function select is to be set
- */
-void GPIO_clr(int gpio);
-
-/**
- * Configure a Clock Manager corresponding to the GPIO bank
- *
- * Args:
- * gpio_bank - The GPIO bank (0:2)
- */
-void GPIO_config_clk(int gpio_bank);
+void gpio_init(int gpio, GPIO_FSEL fsel);
 
 
 #endif /* ifndef GPIO_H */
