@@ -1,13 +1,34 @@
-.global _Reset
-_Reset:
+.section ".text.boot"  // Make sure the linker puts this at the start of the kernel image
+
+.global _start  // Execution starts here
+
+_start:
     // Disable non-primary cores
-    mrs     x0, mpidr_el1
-    and     x0, x0, #0xff   // aff0 indicates core ID
-    cbz     x0, _init
-_secondaries:
-    wfi
-    b       _secondaries    // halt secondary cores
-_init:
+    mrs     x0, mpidr_el1   // x0 = mpidr_el1
+    and     x0, x0, #0x03   // x0 = aff0 (core ID)
+    cbz     x0, 2f          // if (x0 == 0) branch to init
+1:
+    wfe                     // wait for exception
+    b       1b              // wait again
+2:
+    // Set stack to start below our code
+    ldr     x1, =_start
+    mov     sp, x1
+
+    // Clean the BSS section
+    ldr     x1, =__bss_start     // Start address
+    ldr     w2, =__bss_size      // Size of the section
+3:
+    cbz     w2, 4f               // Quit loop if zero
+    str     xzr, [x1], #8
+    sub     w2, w2, #1
+    cbnz    w2, 3b               // Loop if non-zero
+4:
+    // branch to C
+    b       c_entry
+    b       1b
+
+/*
     // Initialize the register bank
     mov     x0, xzr
     mov     x1, xzr
@@ -40,12 +61,7 @@ _init:
     mov     x28, xzr
     mov     x29, xzr
     mov     x30, xzr
-
-    ldr     x0, =stack_top
-    mov     sp, x0
-
-    b       c_entry
-    b       .
+*/
 
 /*  Recommended, but I don't use right now
     // Initialize FP registers

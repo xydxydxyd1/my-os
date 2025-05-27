@@ -3,6 +3,11 @@
 * GPIO control
 
 
+## What isn't done by me
+
+* Linker script (rpi4-osdev)
+
+
 ## RPIOS
 
 This project is meant to teach me about operating systems and bare-metal

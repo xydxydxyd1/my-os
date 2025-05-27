@@ -10,7 +10,8 @@ CC = $(PREFIX)-gcc
 INCLUDES = -iquote. \
 		   -iquoteutils
 # -mgeneral-regs-only cuz floating point is not enabled
-CCFLAGS = $(INCLUDES) -g -Wall -O2 -ffreestanding -nostdinc -nostdlib -nostartfiles -mstrict-align
+# CCFLAGS = $(INCLUDES) -g -Wall -O2 -ffreestanding -nostdinc -nostdlib -nostartfiles -mstrict-align
+CCFLAGS = -mgeneral-regs-only $(INCLUDES) -g -Wall -O2 -nostartfiles -mstrict-align
 
 
 # Source files
@@ -26,13 +27,14 @@ OBJS = startup.o $(SRCS:.c=.o)
 
 # Targets
 
-image: kernel8.img
+all: clean kernel8.img
 
-flash: image
+flash: kernel8.img
 	mkdir -p mountpoint
 	sudo mount /dev/sda1 mountpoint
 	sudo rm -rf mountpoint/kernel*
 	sudo cp kernel8.img mountpoint
+	sleep 1
 	sudo umount /dev/sda1
 	rm -rf mountpoint
 

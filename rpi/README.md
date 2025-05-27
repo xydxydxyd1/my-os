@@ -1,5 +1,3 @@
-# File walkthrough
+# TODO
 
-* `main.c` is the primary executable and C entry point
-* `startup.S` contains bootstrapping code
-* `./arch/` contains architecture-specific interface
+* Don't rely on struct packing due to possible spaces

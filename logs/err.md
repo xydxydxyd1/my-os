@@ -6,3 +6,4 @@ Things that I did wrong
     + 2025-05-16: UART vs. normal GPIO to logic
 * Wrong address
     + 2025-05-16: Copied over UART instead of modifying it to GPIO
+    + 2025-05-17: GPCLR1 ->GPCLR0
