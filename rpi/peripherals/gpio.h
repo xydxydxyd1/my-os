@@ -11,6 +11,9 @@
 #define GPIO_H
 
 
+#include "types.h"
+
+
 typedef enum {
     GPIO_FSEL_IN = 0b000,
     GPIO_FSEL_OUT = 0b001,
@@ -20,7 +23,7 @@ typedef enum {
     GPIO_FSEL_ALT3 = 0b111,
     GPIO_FSEL_ALT4 = 0b011,
     GPIO_FSEL_ALT5 = 0b010,
-} GPIO_FSEL;
+} GpioFsel;
 
 /**
  * Initialize a GPIO pin with a function select
@@ -29,7 +32,16 @@ typedef enum {
  * gpio - 0:57 GPIO pin number
  * fsel - function select value
  */
-void gpio_init(int gpio, GPIO_FSEL fsel);
+void gpio_init(int gpio, GpioFsel fsel);
+
+/**
+ * If `val` is TRUE, set `gpio`. Ohterwise, clear it.
+ *
+ * Args:
+ * gpio - 0:57 GPIO pin number that represents a GPIO pin set up for output
+ * val
+ */
+void gpio_set(int gpio, Boolean val);
 
 
 #endif /* ifndef GPIO_H */
