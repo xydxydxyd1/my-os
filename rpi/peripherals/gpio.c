@@ -33,7 +33,7 @@ volatile uint32_t *FSEL_REGS[6] = {
 void gpio_init(int gpio, GpioFsel fsel) {
     volatile uint32_t *fsel_reg = FSEL_REGS[gpio / 10];
     int fsel_offset = (gpio % 10) * 3;
-    *fsel_reg = (*fsel_reg & ~GET_MASK(fsel_offset, 3)) | 0b111 << fsel_offset;
+    *fsel_reg = (*fsel_reg & ~GET_MASK(fsel_offset, 3)) | fsel << fsel_offset;
 }
 
 void gpio_set(int gpio, Boolean val) {
