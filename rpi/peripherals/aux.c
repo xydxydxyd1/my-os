@@ -13,7 +13,11 @@
 
 void aux_uart_init() {
     // Might need to unlock DLAB?
-    *AUX_MU_BAUD_REG = 9600; // Set baud rate
+    // Set baud rate
+    const int CLK_FREQ = 500000000;
+    const int BAUD_RATE = 9600;
+    *AUX_MU_BAUD_REG = CLK_FREQ / BAUD_RATE / 8 - 1;
+
     *AUX_MU_LCR_REG |= 1; // 8-bit mode
     *AUX_MU_CNTL_REG |= 0b10; // Enable transmitter
     *AUX_ENABLES |= 1; // Enable
