@@ -14,6 +14,7 @@
 
 // includes
 #include <stdint.h>
+#include "types.h"
 
 
 // methods
@@ -27,11 +28,20 @@
 void aux_uart_init();
 
 /**
- * Transmits a single character through the auxilliary UART.
+ * Attempts to transmits a single character through the auxilliary UART.
  *
  * Assumes that `aux_uart_init()` is called before.
+ *
+ * Returns: `ERR_OVERFLOW` if transmit FIFO is full, `SUCCESS` otherwise.
  */
-void aux_uart_putchar(uint8_t c);
+Error aux_uart_putchar(uint8_t c);
+
+/**
+ * printf onto the auxilliary uart.
+ *
+ * Currently, flags are not implemented.
+ */
+void aux_printf(char* fmtstr, ...);
 
 
 #endif /* ifndef AUX_H */

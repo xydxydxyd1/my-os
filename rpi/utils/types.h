@@ -16,5 +16,10 @@ typedef enum {
     TRUE = 1,
 } Boolean;
 
+typedef enum {
+    SUCCESS = 0,
+    ERR_OVERFLOW = -1,
+} Error;
+
 
 #endif /* ifndef TYPES_H */
