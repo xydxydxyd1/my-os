@@ -22,7 +22,7 @@ OBJS = startup.o $(SRCS:.c=.o)
 
 all: clean kernel8.img
 
-flash: kernel8.img
+flash: all
 	mkdir -p mountpoint
 	sudo mount $(FLASH_DEVICE) mountpoint
 	sudo rm -rf mountpoint/kernel*
