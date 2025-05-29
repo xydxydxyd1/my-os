@@ -29,6 +29,7 @@ void aux_uart_init();
 
 /**
  * Attempts to transmits a single character through the auxilliary UART.
+ * Non-blocking.
  *
  * Assumes that `aux_uart_init()` is called before.
  *

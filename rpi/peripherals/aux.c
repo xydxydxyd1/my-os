@@ -28,8 +28,10 @@ void aux_uart_init() {
     const int BAUD_RATE = 115200;
     *AUX_MU_BAUD_REG = CLK_FREQ / (BAUD_RATE * 8) - 1;
 
-    *AUX_MU_LCR_REG = 1; // 8-bit mode
-    *AUX_MU_CNTL_REG = 2; // Enable transmitter and receiver
+    // As of 2025-05-29, documentation is wrong on LCR_REG.
+    // https://github.com/raspberrypi/documentation/issues/2717
+    *AUX_MU_LCR_REG = 3; // 8-bit mode
+    *AUX_MU_CNTL_REG = 2; // Enable transmitter
 }
 
 Error aux_uart_putchar(uint8_t c) {

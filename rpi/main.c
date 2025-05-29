@@ -22,7 +22,7 @@ void c_entry()
     initialize();
     gpio_set(17, FALSE);
     gpio_set(27, TRUE);
-    while (aux_uart_putchar('E') == ERR_OVERFLOW);
+    aux_uart_printf("Hello, world!");
     gpio_set(17, TRUE);
 
     while(1);
