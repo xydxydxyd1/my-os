@@ -20,7 +20,7 @@
 // methods
 
 /**
- * Initializes auxilliary UART with a baud rate of 9600.
+ * Initializes auxilliary UART with a baud rate of 115200.
  *
  * Assumes that config.txt set the core_freq_min=500, otherwise baud rate may
  * vary.

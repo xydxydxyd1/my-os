@@ -1,6 +1,6 @@
 PREFIX = aarch64-none-elf
 CC = $(PREFIX)-gcc
-FLASH_DEVICE = /dev/sdb1
+FLASH_DEVICE = /dev/sda1
 
 # Flags
 INCLUDES = -iquote. \
@@ -15,6 +15,7 @@ CCFLAGS = -mgeneral-regs-only $(INCLUDES) -g -Wall -O2 -nostartfiles -mstrict-al
 SRCS = $(wildcard *.c) \
 	   $(wildcard peripherals/*.c) \
 	   $(wildcard utils/*.c)
+#SRCS = main.c
 OBJS = startup.o $(SRCS:.c=.o)
 
 

@@ -6,16 +6,24 @@
 * Description:      Main routine.
 *****************************************************************************/
 #include "peripherals/gpio.h"
+#include "peripherals/aux.h"
 #include "types.h"
+
+void initialize() {
+    gpio_init(17, GPIO_FSEL_OUT);
+    gpio_init(27, GPIO_FSEL_OUT);
+    gpio_init(14, GPIO_FSEL_ALT5); // TXD1
+    gpio_init(15, GPIO_FSEL_ALT5); // RXD1
+    aux_uart_init();
+}
 
 void c_entry()
 {
-    gpio_init(17, GPIO_FSEL_OUT);
-    gpio_init(27, GPIO_FSEL_OUT);
+    initialize();
     gpio_set(17, FALSE);
     gpio_set(27, TRUE);
-
-    //gpio_init(4, GPIO_FSEL_ALT0); // GPCLK0
+    while (aux_uart_putchar('E') == ERR_OVERFLOW);
+    gpio_set(17, TRUE);
 
     while(1);
 }
