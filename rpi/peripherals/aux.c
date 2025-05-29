@@ -30,7 +30,7 @@ void aux_uart_init() {
 Error aux_uart_putchar(uint8_t c) {
     if ((*AUX_MU_LSR_REG & 1 << 5) == 0)
         return ERR_OVERFLOW;
-    *AUX_MU_IO_REG = c << 8;
+    *AUX_MU_IO_REG = c;
     return SUCCESS;
 }
 
