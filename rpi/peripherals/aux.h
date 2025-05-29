@@ -39,9 +39,11 @@ Error aux_uart_putchar(uint8_t c);
 /**
  * printf onto the auxilliary uart.
  *
+ * Assumes that `aux_uart_init()` is called before
+ *
  * Currently, flags are not implemented.
  */
-void aux_printf(char* fmtstr, ...);
+void aux_uart_printf(char* fmtstr, ...);
 
 
 #endif /* ifndef AUX_H */

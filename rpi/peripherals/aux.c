@@ -15,25 +15,26 @@
 // methods
 
 void aux_uart_init() {
+    *AUX_ENABLES |= 1; // Enable
+
     // Might need to unlock DLAB?
     // Set baud rate
     const int CLK_FREQ = 500000000;
     const int BAUD_RATE = 9600;
-    *AUX_MU_BAUD_REG = CLK_FREQ / BAUD_RATE / 8 - 1;
+    *AUX_MU_BAUD_REG = CLK_FREQ / (BAUD_RATE * 8) - 1;
 
     *AUX_MU_LCR_REG |= 1; // 8-bit mode
     *AUX_MU_CNTL_REG |= 0b10; // Enable transmitter
-    *AUX_ENABLES |= 1; // Enable
 }
 
 Error aux_uart_putchar(uint8_t c) {
     if ((*AUX_MU_LSR_REG & 1 << 5) == 0)
         return ERR_OVERFLOW;
-    *AUX_MU_IO_REG = (*AUX_MU_IO_REG & ~0xff) | c;
+    *AUX_MU_IO_REG = c << 8;
     return SUCCESS;
 }
 
-void aux_printf(char* fmtstr, ...) {
+void aux_uart_printf(char* fmtstr, ...) {
     for (int i = 0; fmtstr[i] != '\0'; i++) {
         while (aux_uart_putchar(fmtstr[i]) == ERR_OVERFLOW);
     }
