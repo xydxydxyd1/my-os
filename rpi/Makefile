@@ -28,6 +28,7 @@ flash: all
 	sudo mount $(FLASH_DEVICE) mountpoint
 	sudo rm -rf mountpoint/kernel*
 	sudo cp kernel8.img mountpoint
+	sudo cp config.txt mountpoint
 	sleep 1
 	sudo umount $(FLASH_DEVICE)
 	rm -rf mountpoint
