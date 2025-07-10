@@ -6,7 +6,7 @@ FLASH_DEVICE = /dev/sda1
 INCLUDES = -iquote. \
 		   -iquoteutils
 # -mgeneral-regs-only cuz floating point is not enabled
-CCFLAGS = -mgeneral-regs-only $(INCLUDES) -g -Wall -O2 -nostartfiles -mstrict-align
+CCFLAGS = -mgeneral-regs-only $(INCLUDES) -g -Wall -nostartfiles -mstrict-align
 
 
 # Source files
